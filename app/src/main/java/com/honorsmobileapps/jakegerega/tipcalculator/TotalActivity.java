@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class TotalActivity extends AppCompatActivity {
 
     private static final String TOTAL_WITH_TIP = "com.honorsmobileapps.jakegerega.tipcalculator.total_with_tip";
@@ -21,6 +23,13 @@ public class TotalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.total_activity);
+
+        subtotal_plus_tip_textview = (TextView) findViewById(R.id.subtotal_with_tip_total_amount_textview);
+        each_person_owes_textview = (TextView) findViewById(R.id.each_person_owes_amount_total);
+        round_up_button = (Button) findViewById(R.id.round_up_button_total);
+        round_down_button = (Button) findViewById(R.id.round_down_button_total);
+
+
 
 
     }
