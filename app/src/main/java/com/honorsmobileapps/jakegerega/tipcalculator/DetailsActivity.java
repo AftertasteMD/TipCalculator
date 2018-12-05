@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -17,11 +18,13 @@ public class DetailsActivity extends AppCompatActivity {
 
     private static final String SUBTOTAL_DETAILS = "com.honorsmobileapps.jakegerega.tipcalculator.subtotal_details";
 
-    SeekBar percentSeekBar;
-    RadioButton tenPercentRadioButton;
-    RadioButton fifteenPercentRadioButton;
-    RadioButton eighteenPercentRadioButton;
-    RadioButton twentyfivePercentRadioButton;
+    private SeekBar percentSeekBar;
+    private RadioButton tenPercentRadioButton;
+    private RadioButton fifteenPercentRadioButton;
+    private RadioButton eighteenPercentRadioButton;
+    private RadioButton twentyfivePercentRadioButton;
+    private Button nextButton;
+    private TextView subtotalAmountView;
 
     double subtotalAmt;
     double subtotalPlusTip;
@@ -33,12 +36,16 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_activity);
 
+        subtotalAmountView = findViewById(R.id.subtotal_amt);
         percentSeekBar = (SeekBar) findViewById(R.id.percent_seek);
         tenPercentRadioButton = (RadioButton) findViewById(R.id.ten_percent_button);
         fifteenPercentRadioButton = (RadioButton) findViewById(R.id.fifteen_percent_button);
         eighteenPercentRadioButton = (RadioButton) findViewById(R.id.eighteen_percent_button);
         twentyfivePercentRadioButton = (RadioButton) findViewById(R.id.twentyfive_percent_button);
+        nextButton = (Button) findViewById(R.id.button_next);
         subtotalAmt = getIntent().getLongExtra(SUBTOTAL_DETAILS, 0);
+        subtotalAmountView.setText(String.format("$%.2f", subtotalAmt));
+
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -55,6 +62,10 @@ public class DetailsActivity extends AppCompatActivity {
                 if (v.getId() == R.id.twentyfive_percent_button) {
                     tip = 25;
                 }
+                if(v.getId()== R.id.button_next){
+                    Intent i = TotalActivity.newIntent(DetailsActivity.this, subtotalPlusTip, numOfGuests);
+                    startActivity(i);
+                }
                 percentSeekBar.setProgress(tip);
                 setTipTextView();
             }
@@ -64,6 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
         fifteenPercentRadioButton.setOnClickListener(listener);
         eighteenPercentRadioButton.setOnClickListener(listener);
         twentyfivePercentRadioButton.setOnClickListener(listener);
+
 
         setUpNumOfGuestsSpinner();
         setUpTipSeekBar();

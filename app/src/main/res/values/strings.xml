@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">Tip Calculator</string>
     <string name="subtotal">Subtotal:</string>
+
     <string name="tip_amt_details">Tip Amount:</string>
     <string name="total_with_tip_details">Total with Tip:</string>
     <string name="guests_details">Guests:</string>
-    <string name="next_details"><![CDATA[Next>]]></string>
+    <string name="next_details">Next</string>
+
+    <string name="subtotal_with_tip_total">Subtotal plus tip:</string>
+    <string name="round_down_button_total">Round Down</string>
+    <string name="round_up_button_total">Round Up</string>
+    <string name="each_person_owes_total">Each person owes:</string>
 
 
     <string-array name="guests">

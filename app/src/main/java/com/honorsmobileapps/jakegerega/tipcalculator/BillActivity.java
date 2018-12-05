@@ -12,19 +12,19 @@ import android.widget.TextView;
 
 public class BillActivity extends AppCompatActivity {
 
-    Button subtotalButtonOne;
-    Button subtotalButtonTwo;
-    Button subtotalButtonThree;
-    Button subtotalButtonFour;
-    Button subtotalButtonFive;
-    Button subtotalButtonSix;
-    Button subtotalButtonSeven;
-    Button subtotalButtonEight;
-    Button subtotalButtonNine;
-    Button subtotalButtonZero;
-    Button subtotalButtonBack;
-    Button subtotalButtonDone;
-    TextView subtotalAmountView;
+    private Button subtotalButtonOne;
+    private Button subtotalButtonTwo;
+    private Button subtotalButtonThree;
+    private Button subtotalButtonFour;
+    private Button subtotalButtonFive;
+    private Button subtotalButtonSix;
+    private Button subtotalButtonSeven;
+    private Button subtotalButtonEight;
+    private Button subtotalButtonNine;
+    private Button subtotalButtonZero;
+    private Button subtotalButtonBack;
+    private Button subtotalButtonDone;
+    private TextView subtotalAmountView;
 
     long subtotal;
     int digitEntered;
