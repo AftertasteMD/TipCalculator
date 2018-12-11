@@ -12,18 +12,6 @@ import android.widget.TextView;
 
 public class BillActivity extends AppCompatActivity {
 
-    private Button subtotalButtonOne;
-    private Button subtotalButtonTwo;
-    private Button subtotalButtonThree;
-    private Button subtotalButtonFour;
-    private Button subtotalButtonFive;
-    private Button subtotalButtonSix;
-    private Button subtotalButtonSeven;
-    private Button subtotalButtonEight;
-    private Button subtotalButtonNine;
-    private Button subtotalButtonZero;
-    private Button subtotalButtonBack;
-    private Button subtotalButtonDone;
     private TextView subtotalAmountView;
 
     long subtotal;
@@ -33,71 +21,72 @@ public class BillActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bill_activity);
-
-        subtotalButtonOne = (Button) findViewById(R.id.button_one);
-        subtotalButtonTwo = (Button) findViewById(R.id.button_two);
-        subtotalButtonThree = (Button) findViewById(R.id.button_three);
-        subtotalButtonFour = (Button) findViewById(R.id.button_four);
-        subtotalButtonFive = (Button) findViewById(R.id.button_five);
-        subtotalButtonSix = (Button) findViewById(R.id.button_six);
-        subtotalButtonSeven = (Button) findViewById(R.id.button_seven);
-        subtotalButtonEight = (Button) findViewById(R.id.button_eight);
-        subtotalButtonNine = (Button) findViewById(R.id.button_nine);
-        subtotalButtonZero = (Button) findViewById(R.id.button_zero);
-        subtotalButtonBack = (Button) findViewById(R.id.button_back);
-        subtotalButtonDone = (Button) findViewById(R.id.button_done);
-        subtotalAmountView = (TextView) findViewById(R.id.subtotal_amount);
+        Button subtotalButtonOne = findViewById(R.id.button_one);
+        Button subtotalButtonTwo = findViewById(R.id.button_two);
+        Button subtotalButtonThree = findViewById(R.id.button_three);
+        Button subtotalButtonFour = findViewById(R.id.button_four);
+        Button subtotalButtonFive = findViewById(R.id.button_five);
+        Button subtotalButtonSix = findViewById(R.id.button_six);
+        Button subtotalButtonSeven = findViewById(R.id.button_seven);
+        Button subtotalButtonEight = findViewById(R.id.button_eight);
+        Button subtotalButtonNine = findViewById(R.id.button_nine);
+        Button subtotalButtonZero = findViewById(R.id.button_zero);
+        Button subtotalButtonBack = findViewById(R.id.button_back);
+        Button subtotalButtonDone = findViewById(R.id.button_done);
+        subtotalAmountView = findViewById(R.id.subtotal_amount);
         subtotal = 0;
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v.getId() == R.id.button_one){
+                if (v.getId() == R.id.button_one) {
                     digitEntered = 1;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_two){
+                if (v.getId() == R.id.button_two) {
                     digitEntered = 2;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_three){
+                if (v.getId() == R.id.button_three) {
                     digitEntered = 3;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_four){
+                if (v.getId() == R.id.button_four) {
                     digitEntered = 4;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_five){
+                if (v.getId() == R.id.button_five) {
                     digitEntered = 5;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_six){
+                if (v.getId() == R.id.button_six) {
                     digitEntered = 6;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_seven){
+                if (v.getId() == R.id.button_seven) {
                     digitEntered = 7;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_eight){
+                if (v.getId() == R.id.button_eight) {
                     digitEntered = 8;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_nine){
+                if (v.getId() == R.id.button_nine) {
                     digitEntered = 9;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_zero){
+                if (v.getId() == R.id.button_zero) {
                     digitEntered = 0;
                     addToSubtotal();
                 }
-                if(v.getId() == R.id.button_back){
+                if (v.getId() == R.id.button_back) {
                     removeFromSubtotal();
                 }
-                if(v.getId() == R.id.button_done){
-                    Intent i = DetailsActivity.newIntent(BillActivity.this, subtotal);
-                    startActivity(i);
+                if (v.getId() == R.id.button_done) {
+                    if(subtotal != 0){
+                        Intent i = DetailsActivity.newIntent(BillActivity.this, subtotal);
+                        startActivity(i);
+                    }
                 }
             }
         };
@@ -116,11 +105,12 @@ public class BillActivity extends AppCompatActivity {
 
     }
 
-    public void addToSubtotal(){
+    public void addToSubtotal() {
         subtotal = (subtotal * 10) + digitEntered;
         subtotalAmountView.setText("$" + subtotal + ".00");
     }
-    public void removeFromSubtotal(){
+
+    public void removeFromSubtotal() {
         subtotal = subtotal / 10;
         subtotalAmountView.setText("$" + subtotal + ".00");
     }

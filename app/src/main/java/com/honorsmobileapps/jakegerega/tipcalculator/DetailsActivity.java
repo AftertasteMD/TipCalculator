@@ -23,12 +23,10 @@ public class DetailsActivity extends AppCompatActivity {
     private RadioButton fifteenPercentRadioButton;
     private RadioButton eighteenPercentRadioButton;
     private RadioButton twentyfivePercentRadioButton;
-    private Button nextButton;
-    private TextView subtotalAmountView;
 
     double subtotalAmt;
     double subtotalPlusTip;
-    int numOfGuests;
+    double numOfGuests;
     int tip;
 
     @Override
@@ -36,13 +34,13 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_activity);
 
-        subtotalAmountView = findViewById(R.id.subtotal_amt);
-        percentSeekBar = (SeekBar) findViewById(R.id.percent_seek);
-        tenPercentRadioButton = (RadioButton) findViewById(R.id.ten_percent_button);
-        fifteenPercentRadioButton = (RadioButton) findViewById(R.id.fifteen_percent_button);
-        eighteenPercentRadioButton = (RadioButton) findViewById(R.id.eighteen_percent_button);
-        twentyfivePercentRadioButton = (RadioButton) findViewById(R.id.twentyfive_percent_button);
-        nextButton = (Button) findViewById(R.id.button_next);
+        TextView subtotalAmountView = findViewById(R.id.subtotal_amt);
+        percentSeekBar = findViewById(R.id.percent_seek);
+        tenPercentRadioButton = findViewById(R.id.ten_percent_button);
+        fifteenPercentRadioButton = findViewById(R.id.fifteen_percent_button);
+        eighteenPercentRadioButton = findViewById(R.id.eighteen_percent_button);
+        twentyfivePercentRadioButton = findViewById(R.id.twentyfive_percent_button);
+        Button nextButton = findViewById(R.id.button_next);
         subtotalAmt = getIntent().getLongExtra(SUBTOTAL_DETAILS, 0);
         subtotalAmountView.setText(String.format("$%.2f", subtotalAmt));
 
@@ -62,7 +60,7 @@ public class DetailsActivity extends AppCompatActivity {
                 if (v.getId() == R.id.twentyfive_percent_button) {
                     tip = 25;
                 }
-                if(v.getId()== R.id.button_next){
+                if (v.getId() == R.id.button_next) {
                     Intent i = TotalActivity.newIntent(DetailsActivity.this, subtotalPlusTip, numOfGuests);
                     startActivity(i);
                 }
@@ -75,6 +73,7 @@ public class DetailsActivity extends AppCompatActivity {
         fifteenPercentRadioButton.setOnClickListener(listener);
         eighteenPercentRadioButton.setOnClickListener(listener);
         twentyfivePercentRadioButton.setOnClickListener(listener);
+        nextButton.setOnClickListener(listener);
 
 
         setUpNumOfGuestsSpinner();
@@ -104,19 +103,19 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void setTipTextView() {
-        TextView tipAmountTextView = (TextView) findViewById(R.id.tip_amount_val);
+        TextView tipAmountTextView = findViewById(R.id.tip_amount_val);
         tipAmountTextView.setText(tip + "%");
         updateSubtotalWithTipTextView();
     }
 
     public void updateSubtotalWithTipTextView() {
-        TextView subtotalTextView = (TextView) findViewById(R.id.total_with_tip_val);
+        TextView subtotalTextView = findViewById(R.id.total_with_tip_val);
         subtotalPlusTip = (subtotalAmt * (tip / 100.0)) + subtotalAmt;
         subtotalTextView.setText(String.format("$%.2f", subtotalPlusTip));
     }
 
     public void setRadioButtonAsChecked() {
-        RadioGroup percentGroup = (RadioGroup) findViewById(R.id.percent_group);
+        RadioGroup percentGroup = findViewById(R.id.percent_group);
         percentGroup.clearCheck();
         if (tip == 10) {
             tenPercentRadioButton.setChecked(true);
@@ -131,14 +130,14 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void setUpNumOfGuestsSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.guest_spinner);
+        Spinner spinner = findViewById(R.id.guest_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.guests, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         AdapterView.OnItemSelectedListener adapterListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                numOfGuests = Integer.parseInt(parent.getItemAtPosition(position).toString());
+                numOfGuests = Double.parseDouble(parent.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -148,7 +147,7 @@ public class DetailsActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(adapterListener);
     }
 
-    public static Intent newIntent(Context packageContext, long subtotal){
+    public static Intent newIntent(Context packageContext, long subtotal) {
         Intent i = new Intent(packageContext, DetailsActivity.class);
         i.putExtra(SUBTOTAL_DETAILS, subtotal);
         return i;
