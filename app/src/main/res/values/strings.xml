@@ -10,6 +10,7 @@
     <string name="round_down_button_total">Round Down</string>
     <string name="round_up_button_total">Round Up</string>
     <string name="each_person_owes_total">Each person owes:</string>
+    <string name="credits">By Jacob Gerega</string>
 
 
     <string-array name="guests">
