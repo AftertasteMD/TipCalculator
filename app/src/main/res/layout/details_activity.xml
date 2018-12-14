@@ -24,15 +24,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/zero_percent"
         android:text="0%"
+        android:layout_toLeftOf="@id/percent_seek"
         android:textSize="20sp"
-        android:layout_below="@id/subtotal"
-        android:layout_marginLeft="15dp"/>
+        android:layout_below="@id/subtotal" />
     <SeekBar
-        android:layout_width="270dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/zero_percent"
-        android:paddingTop="5dp"
-        android:paddingBottom="16dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/subtotal"
         android:max="30"
         android:id="@+id/percent_seek"
@@ -44,12 +42,13 @@
         android:text="30%"
         android:textSize="20sp"
         android:layout_below="@id/subtotal"
-        android:layout_toRightOf="@id/percent_seek" />
+        android:layout_toRightOf="@id/percent_seek"
+/>
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="36dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/percent_seek"
         android:id="@+id/percent_group">
         <RadioButton
@@ -81,7 +80,6 @@
             android:layout_height="wrap_content"
             android:text="25%"
             android:textAppearance="?android:textAppearanceMedium"
-            android:layout_marginRight="9dp"
             android:id="@+id/twentyfive_percent_button"
             />
     </RadioGroup>
