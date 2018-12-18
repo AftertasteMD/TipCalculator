@@ -17,6 +17,7 @@ import android.widget.TextView;
 public class DetailsActivity extends AppCompatActivity {
 
     private static final String SUBTOTAL_DETAILS = "com.honorsmobileapps.jakegerega.tipcalculator.subtotal_details";
+    private static final String PERCENT_TIP = "tip";
 
     private SeekBar percentSeekBar;
     private RadioButton tenPercentRadioButton;
@@ -43,6 +44,11 @@ public class DetailsActivity extends AppCompatActivity {
         Button nextButton = findViewById(R.id.button_next);
         subtotalAmt = getIntent().getLongExtra(SUBTOTAL_DETAILS, 0);
         subtotalAmountView.setText(String.format("$%.2f", subtotalAmt));
+
+        if(savedInstanceState != null){
+            tip = savedInstanceState.getInt(PERCENT_TIP);
+            setTipTextView();
+        }
 
 
         View.OnClickListener listener = new View.OnClickListener() {
@@ -151,5 +157,11 @@ public class DetailsActivity extends AppCompatActivity {
         Intent i = new Intent(packageContext, DetailsActivity.class);
         i.putExtra(SUBTOTAL_DETAILS, subtotal);
         return i;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(PERCENT_TIP, tip);
     }
 }

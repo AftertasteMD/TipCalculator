@@ -12,7 +12,6 @@ public class TotalActivity extends AppCompatActivity {
 
     private static final String TOTAL_WITH_TIP = "com.honorsmobileapps.jakegerega.tipcalculator.total_with_tip";
     private static final String NUM_OF_GUESTS = "com.honorsmobileapps.jakegerega.tipcalculator.num_of_guests";
-
     private TextView eachPersonOwesTextview;
     private double EachPersonPaysAmount;
 
@@ -21,16 +20,17 @@ public class TotalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.total_activity);
 
-        TextView subtotalPlusTipTextview = findViewById(R.id.subtotal_with_tip_total_amount_textview);
+        TextView subtotalPlusTipTextView = findViewById(R.id.subtotal_with_tip_total_amount_textview);
         eachPersonOwesTextview = findViewById(R.id.each_person_owes_amount_total);
         Button roundDownButton = findViewById(R.id.round_up_button_total);
         Button roundUpButton = findViewById(R.id.round_down_button_total);
+
 
         //round up with casting to int and adding one
         //round down with casting to int
         double TotalWithTip = getIntent().getDoubleExtra(TOTAL_WITH_TIP, 0);
         EachPersonPaysAmount = getIntent().getDoubleExtra(TOTAL_WITH_TIP, 0) / getIntent().getDoubleExtra(NUM_OF_GUESTS, 1.0);
-        subtotalPlusTipTextview.setText(String.format("$%.2f", TotalWithTip));
+        subtotalPlusTipTextView.setText(String.format("$%.2f", TotalWithTip));
         updateEachPersonOwesTextView();
 
         View.OnClickListener listener = new View.OnClickListener() {

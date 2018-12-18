@@ -17,6 +17,8 @@ public class BillActivity extends AppCompatActivity {
     long subtotal;
     int digitEntered;
 
+    private static final String SUBTOTAL_AMT = "subtotal";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,11 @@ public class BillActivity extends AppCompatActivity {
         Button subtotalButtonDone = findViewById(R.id.button_done);
         subtotalAmountView = findViewById(R.id.subtotal_amount);
         subtotal = 0;
+
+        if(savedInstanceState != null){
+            subtotal = savedInstanceState.getLong(SUBTOTAL_AMT);
+            subtotalAmountView.setText("$" + subtotal + ".00");
+        }
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -113,5 +120,11 @@ public class BillActivity extends AppCompatActivity {
     public void removeFromSubtotal() {
         subtotal = subtotal / 10;
         subtotalAmountView.setText("$" + subtotal + ".00");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putLong(SUBTOTAL_AMT, subtotal);
     }
 }
